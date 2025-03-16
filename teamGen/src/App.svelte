@@ -27,6 +27,14 @@
 		people = people
 	}
 
+	let newPerson;
+
+	function addPersonToPeople() {
+		people.push({ id: people.length+1, name: newPerson, selected: true})
+		people = people;
+		newPerson = '';
+	}
+
 	$: team1 = [];
 	$: team2 = [];
 
@@ -43,8 +51,6 @@
 			counter++;
 			return person;
 		});
-		console.log(people);
-		console.log(selectedPeopleCopy);
 		if (!selectedPeople) return;
 
 		console.log(selectedPeople);
@@ -97,6 +103,13 @@
 	person={person.name}/>
 </div>
 {/each}
+<div>
+	<input placeholder="Add new player..." on:enter={addPersonToPeople} bind:value={newPerson}>
+	<button on:click={addPersonToPeople}>Add</button>
+</div>
+
+{newPerson}
+
 </div>
 <button class="middle" on:click={pickTeams}>Make Teams</button>
 
